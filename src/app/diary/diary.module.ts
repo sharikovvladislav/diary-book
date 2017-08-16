@@ -21,7 +21,7 @@ import { DiaryEntryService } from './services/diary-entry';
 import { reducers } from './reducers';
 import { RouterModule } from '@angular/router';
 
-import { CoreModule } from '../core/core.module'
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   imports: [
