@@ -46,10 +46,7 @@ export class DiaryEffects {
   @Effect()
   load$: Observable<Action> = this.actions$
     .ofType(diaryActions.LOAD_LIST)
-    .do((action: any) => {
-      debugger;
-      return this.store.dispatch(new layoutActions.ShowSpinnerAction(action.type));
-    })
+    .do((action: any) => this.store.dispatch(new layoutActions.ShowSpinnerAction(action.type)))
     .withLatestFrom(this.store)
     .filter(([action, state]) => fromRoot.getUserIsLoggedIn(state))
     .switchMap(() => {
