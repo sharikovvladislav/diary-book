@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../reducers';
 
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/take';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
