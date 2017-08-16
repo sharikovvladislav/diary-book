@@ -16,10 +16,10 @@ import * as firebase from 'firebase/app';
   template: `
     <bc-layout>
       <bc-sidenav [open]="showSidenav$ | async">
-        <bc-nav-item (activate)="closeSidenav()" routerLink="/diary" icon="book" hint="View your diary">
+        <bc-nav-item (activate)="closeSidenav()" routerLink="/diary/my-dairy" hint="View your diary">
           My dairy
         </bc-nav-item>
-        <bc-nav-item (activate)="closeSidenav()" routerLink="/friends" icon="book" hint="View your diary">
+        <bc-nav-item (activate)="closeSidenav()" routerLink="/friends" hint="Friends list">
           Friends
         </bc-nav-item>
         <bc-nav-item *ngIf="!(isLoggedIn$ | async)" (activate)="login()">
@@ -33,7 +33,9 @@ import * as firebase from 'firebase/app';
         Diary
       </bc-toolbar>
       <app-loader></app-loader>
+      <div (click)="closeSidenav();">
       <router-outlet></router-outlet>
+      </div>
     </bc-layout>
   `,
 })
