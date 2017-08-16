@@ -6,7 +6,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ComponentsModule } from './components';
-import { LulDiaryComponent } from './containers/lul';
 import { EntryEditDialogComponent } from './containers/edit-entry-dialog';
 import { EntryCreateDialogComponent } from './containers/create-entry-dialog';
 import { EntryEditContainerComponent } from './containers/entry-edit-container';
@@ -54,7 +53,6 @@ import { CoreModule } from '../core/core.module';
     EffectsModule.forFeature([DiaryEffects]),
   ],
   declarations: [
-    LulDiaryComponent,
     EntryEditDialogComponent,
     EntryCreateDialogComponent,
     EntryEditContainerComponent,
