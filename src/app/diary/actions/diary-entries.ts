@@ -81,10 +81,10 @@ export class EditEntryFailureAction implements Action {
 export type Actions
   = LoadListAction
   | LoadListSuccessAction
+  | LoadListFailureAction
   | CreateEntryFailureAction
   | CreateEntrySuccessAction
   | CreateEntryFailureAction
   | EditEntryFailureAction
   | EditEntrySuccessAction
-  | EditEntryAction
-  | LoadListFailureAction;
+  | EditEntryAction;

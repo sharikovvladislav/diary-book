@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ComponentsModule } from './components';
 import { LulDiaryComponent } from './containers/lul';
@@ -11,9 +12,11 @@ import { EntryCreateDialogComponent } from './containers/create-entry-dialog';
 import { EntryEditContainerComponent } from './containers/entry-edit-container';
 import { EntryCreateContainerComponent } from './containers/entry-create-container';
 import { MyDairyPageComponent } from './containers/my-dairy-page';
-import { DiaryEffect } from './effects/diary.effect';
+import { DiaryEffects } from './effects/diary.effect';
 
 import { DialogFactoryService } from './services/dialog-factory';
+import { DiaryProcessorService } from './services/diary-processor';
+import { DiaryEntryService } from './services/diary-entry';
 
 import { reducers } from './reducers';
 import { RouterModule } from '@angular/router';
@@ -29,6 +32,8 @@ import { CoreModule } from '../core/core.module'
     RouterModule.forChild([
       { path: '', component: MyDairyPageComponent },
     ]),
+
+    HttpClientModule,
 
     /**
      * StoreModule.forFeature is used for composing state
@@ -46,7 +51,7 @@ import { CoreModule } from '../core/core.module'
      * All Effects will only be instantiated once regardless of
      * whether they are registered once or multiple times.
      */
-    EffectsModule.forFeature([DiaryEffect]),
+    EffectsModule.forFeature([DiaryEffects]),
   ],
   declarations: [
     LulDiaryComponent,
@@ -56,7 +61,7 @@ import { CoreModule } from '../core/core.module'
     EntryCreateContainerComponent,
     MyDairyPageComponent,
   ],
-  providers: [DialogFactoryService],
+  providers: [DialogFactoryService, DiaryProcessorService, DiaryEntryService],
   entryComponents: [
     EntryEditDialogComponent,
     EntryCreateDialogComponent,
