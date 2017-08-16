@@ -18,8 +18,6 @@ import { KekComponent } from './containers/kek';
 import { CommonShowIfLoggedInComponent } from './containers/common-show-if-logged-in';
 import { LoaderComponent } from './containers/loader';
 
-// import { GoogleBooksService } from './services/google-books';
-
 export const COMPONENTS = [
   AppComponent,
   NotFoundPageComponent,
@@ -50,7 +48,6 @@ export class CoreModule {
   static forRoot() {
     return {
       ngModule: CoreModule,
-      providers: [/*GoogleBooksService*/],
     };
   }
 }

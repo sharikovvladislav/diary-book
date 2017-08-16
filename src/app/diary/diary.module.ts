@@ -12,7 +12,7 @@ import { EntryCreateDialogComponent } from './containers/create-entry-dialog';
 import { EntryEditContainerComponent } from './containers/entry-edit-container';
 import { EntryCreateContainerComponent } from './containers/entry-create-container';
 import { MyDairyPageComponent } from './containers/my-dairy-page';
-import { DiaryEffects } from './effects/diary.effect';
+import { DiaryEffects } from './effects/diary';
 
 import { DialogFactoryService } from './services/dialog-factory';
 import { DiaryProcessorService } from './services/diary-processor';

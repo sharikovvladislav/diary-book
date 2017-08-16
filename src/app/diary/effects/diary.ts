@@ -16,7 +16,9 @@ import { of } from 'rxjs/observable/of';
 import * as fromRoot from '../../reducers';
 
 import { DiaryEntryService } from '../services/diary-entry';
-import * as diaryEntry from '../actions/diary-entries';
+
+import * as diaryActions from '../actions/diary-entries';
+import * as layoutActions from '../../core/actions/layout';
 
 import { DiaryEntry } from '../../shared/models/diary-entry';
 
@@ -43,39 +45,48 @@ import { DialogFactoryService } from '../services/dialog-factory';
 export class DiaryEffects {
   @Effect()
   load$: Observable<Action> = this.actions$
-    .ofType(diaryEntry.LOAD_LIST)
+    .ofType(diaryActions.LOAD_LIST)
+    .do((action: any) => {
+      debugger;
+      return this.store.dispatch(new layoutActions.ShowSpinnerAction(action.type));
+    })
     .withLatestFrom(this.store)
     .filter(([action, state]) => fromRoot.getUserIsLoggedIn(state))
     .switchMap(() => {
       return this.diaryEntryService.retrieveEntries()
-        .map((diaryEntries: DiaryEntry[]) => new diaryEntry.LoadListSuccessAction(diaryEntries))
-        .catch(() => of(new diaryEntry.LoadListFailureAction([])));
+        .map((diaryEntries: DiaryEntry[]) => new diaryActions.LoadListSuccessAction(diaryEntries))
+        .catch(() => of(new diaryActions.LoadListFailureAction([])))
+        .do(({type}) => this.store.dispatch(new layoutActions.HideSpinnerAction(type)));
     });
 
   @Effect()
   create$: Observable<Action> = this.actions$
-    .ofType(diaryEntry.CREATE_ENTRY)
+    .ofType(diaryActions.CREATE_ENTRY)
+    .do((action: any) => this.store.dispatch(new layoutActions.ShowSpinnerAction(action.type)))
     .withLatestFrom(this.store)
     .switchMap(([action, state]: [any, any]) => {
       const uid = fromRoot.getUserUid(state);
 
       return this.diaryEntryService.createEntry(uid, action.payload)
-        .map((newEntryData: DiaryEntry) => new diaryEntry.CreateEntrySuccessAction(newEntryData))
+        .map((newEntryData: DiaryEntry) => new diaryActions.CreateEntrySuccessAction(newEntryData))
         .do(() => this.dialogFactory.closeCreateEntryDialog())
-        .catch(() => of(new diaryEntry.CreateEntryFailureAction([])));
+        .catch(() => of(new diaryActions.CreateEntryFailureAction([])))
+        .do(({type}) => this.store.dispatch(new layoutActions.HideSpinnerAction(type)));
     });
 
   @Effect()
   edit$: Observable<Action> = this.actions$
-    .ofType(diaryEntry.EDIT_ENTRY)
-    .switchMap((action: diaryEntry.EditEntryAction) => {
+    .ofType(diaryActions.EDIT_ENTRY)
+    .do((action: any) => this.store.dispatch(new layoutActions.ShowSpinnerAction(action.type)))
+    .switchMap((action: diaryActions.EditEntryAction) => {
       return this.diaryEntryService.updateEntry(action.payload)
         .map((updatedEntryData: DiaryEntry) =>
-          new diaryEntry.EditEntrySuccessAction(updatedEntryData)
+          new diaryActions.EditEntrySuccessAction(updatedEntryData)
         )
-        .do(() => this.store.dispatch(new diaryEntry.LoadListAction()))
+        .do(() => this.store.dispatch(new diaryActions.LoadListAction()))
         .do(() => this.dialogFactory.closeEditEntryDialog())
-        .catch(() => of(new diaryEntry.EditEntryFailureAction(null)));
+        .catch(() => of(new diaryActions.EditEntryFailureAction(null)))
+        .do(({type}) => this.store.dispatch(new layoutActions.HideSpinnerAction(type)));
     });
 
   constructor(
