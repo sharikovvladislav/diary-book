@@ -13,6 +13,7 @@ import { NotLoggedInComponent } from './components/not-logged-in';
 import { LulComponent } from './containers/lul';
 import { KekComponent } from './containers/kek';
 import { CommonShowIfLoggedInComponent } from './containers/common-show-if-logged-in';
+import { LoaderComponent } from './containers/loader';
 
 // import { GoogleBooksService } from './services/google-books';
 
@@ -27,6 +28,7 @@ export const COMPONENTS = [
   ToolbarComponent,
   NotLoggedInComponent,
   CommonShowIfLoggedInComponent,
+  LoaderComponent,
 ];
 
 @NgModule({

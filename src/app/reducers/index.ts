@@ -63,6 +63,10 @@ export const getShowSidenav = createSelector(
   getLayoutState,
   fromLayout.getShowSidenav
 );
+export const getIsSpinnerShown = createSelector(
+  getLayoutState,
+  fromLayout.getIsSpinnerShown
+);
 
 
 export const getUserState = createFeatureSelector<fromUser.State>('user');
