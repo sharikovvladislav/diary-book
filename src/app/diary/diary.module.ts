@@ -5,23 +5,30 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { ComponentsModule } from './components';
+import { LulDiaryComponent } from './containers/lul';
+import { EntryEditDialogComponent } from './containers/edit-entry-dialog';
+import { EntryCreateDialogComponent } from './containers/create-entry-dialog';
+import { EntryEditContainerComponent } from './containers/entry-edit-container';
+import { EntryCreateContainerComponent } from './containers/entry-create-container';
+import { MyDairyPageComponent } from './containers/my-dairy-page';
 import { DiaryEffect } from './effects/diary.effect';
 
+import { DialogFactoryService } from './services/dialog-factory';
+
 import { reducers } from './reducers';
+import { RouterModule } from '@angular/router';
+
+import { CoreModule } from '../core/core.module'
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     ComponentsModule,
-    // RouterModule.forChild([
-    //   { path: 'find', component: FindBookPageComponent },
-    //   {
-    //     path: ':id',
-    //     component: ViewBookPageComponent,
-    //   },
-    //   { path: '', component: CollectionPageComponent },
-    // ]),
+    CoreModule,
+    RouterModule.forChild([
+      { path: '', component: MyDairyPageComponent },
+    ]),
 
     /**
      * StoreModule.forFeature is used for composing state
@@ -42,11 +49,13 @@ import { reducers } from './reducers';
     EffectsModule.forFeature([DiaryEffect]),
   ],
   declarations: [
-    // FindBookPageComponent,
-    // ViewBookPageComponent,
-    // SelectedBookPageComponent,
-    // CollectionPageComponent,
+    LulDiaryComponent,
+    EntryEditDialogComponent,
+    EntryCreateDialogComponent,
+    EntryEditContainerComponent,
+    EntryCreateContainerComponent,
+    MyDairyPageComponent,
   ],
-  providers: [/*BookExistsGuard*/],
+  providers: [DialogFactoryService],
 })
 export class DiaryModule {}

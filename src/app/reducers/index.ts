@@ -5,7 +5,6 @@ import {
   ActionReducer,
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-// import * as fromRouter from '@ngrx/router-store';
 
 /**
  * Every reducer module's default export is the reducer function itself. In
@@ -15,6 +14,7 @@ import { environment } from '../../environments/environment';
  */
 
 import * as fromLayout from '../core/reducers/layout';
+import * as fromUser from '../core/reducers/user';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -22,7 +22,7 @@ import * as fromLayout from '../core/reducers/layout';
  */
 export interface State {
   layout: fromLayout.State;
-  // routerReducer: fromRouter.RouterReducerState;
+  user: fromUser.State;
 }
 
 /**
@@ -32,7 +32,7 @@ export interface State {
  */
 export const reducers: ActionReducerMap<State> = {
   layout: fromLayout.reducer,
-  // routerReducer: fromRouter.routerReducer,
+  user: fromUser.reducer,
 };
 
 // console.log all actions
@@ -62,4 +62,27 @@ export const getLayoutState = createFeatureSelector<fromLayout.State>('layout');
 export const getShowSidenav = createSelector(
   getLayoutState,
   fromLayout.getShowSidenav
+);
+
+
+export const getUserState = createFeatureSelector<fromUser.State>('user');
+
+export const getUserIsLoggedIn = createSelector(
+  getUserState,
+  fromUser.isLoggedIn
+);
+
+export const getUserUid = createSelector(
+  getUserState,
+  fromUser.getUid
+);
+
+export const getUser = createSelector(
+  getUserState,
+  fromUser.getUser
+);
+
+export const getUserToken = createSelector(
+  getUserState,
+  fromUser.getToken
 );

@@ -10,17 +10,23 @@ import { NavItemComponent } from './components/nav-item';
 import { SidenavComponent } from './components/sidenav';
 import { ToolbarComponent } from './components/toolbar';
 import { NotLoggedInComponent } from './components/not-logged-in';
+import { LulComponent } from './containers/lul';
+import { KekComponent } from './containers/kek';
+import { CommonShowIfLoggedInComponent } from './containers/common-show-if-logged-in';
 
 // import { GoogleBooksService } from './services/google-books';
 
 export const COMPONENTS = [
   AppComponent,
   NotFoundPageComponent,
+  LulComponent,
+  KekComponent,
   LayoutComponent,
   NavItemComponent,
   SidenavComponent,
   ToolbarComponent,
   NotLoggedInComponent,
+  CommonShowIfLoggedInComponent,
 ];
 
 @NgModule({
