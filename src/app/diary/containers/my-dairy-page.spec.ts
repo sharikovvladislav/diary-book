@@ -13,7 +13,7 @@ import { DialogFactoryService } from '../services/dialog-factory';
 import { DiaryProcessorService } from '../services/diary-processor';
 import { DiaryEntryService } from '../services/diary-entry';
 
-describe('MyDairyPageComponentx', () => {
+describe('MyDairyPageComponent', () => {
   let component: MyDairyPageComponent;
   let fixture: ComponentFixture<MyDairyPageComponent>;
   let store: Store<fromFeature.State>;
