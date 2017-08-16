@@ -57,5 +57,9 @@ import { CoreModule } from '../core/core.module'
     MyDairyPageComponent,
   ],
   providers: [DialogFactoryService],
+  entryComponents: [
+    EntryEditDialogComponent,
+    EntryCreateDialogComponent,
+  ]
 })
 export class DiaryModule {}
